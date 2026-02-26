@@ -97,6 +97,13 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findByEventDateTimeAfterOrderByEventDateTime(LocalDateTime.now());
     }
  
+
+    @Override
+    public List<Event> getEventsByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
+        // commit for getEvent
+        return eventRepository.findByTicketPriceBetween(minPrice, maxPrice);
+    }
+ 
     
  
 }
