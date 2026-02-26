@@ -109,6 +109,13 @@ public class EventServiceImpl implements EventService {
     public List<Event> getEventsByDateRange(LocalDateTime start, LocalDateTime end) {
         return eventRepository.findByEventDateTimeBetween(start, end);
     }
+
+     @Override
+    public Event updateEventPrice(UUID id, BigDecimal newPrice) {
+        Event event = getEventById(id); // Reuses your existing getEventById logic
+        event.setTicketPrice(newPrice);
+        return eventRepository.save(event);
+    }
     
  
 }

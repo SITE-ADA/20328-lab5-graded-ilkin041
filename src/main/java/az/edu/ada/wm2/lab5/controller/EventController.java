@@ -24,77 +24,71 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    // 1. CREATE - POST /api/events
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         try {
             Event createdEvent = eventService.createEvent(event);
             return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
-    // 2. LIST ALL - GET /api/events
     @GetMapping
     public ResponseEntity<List<Event>> getAllEvents() {
         try {
             List<Event> events = eventService.getAllEvents();
             return new ResponseEntity<>(events, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    // 3. GET ONE BY ID - GET /api/events/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Event> getEventById(@PathVariable UUID id) {
         try {
             Event event = eventService.getEventById(id);
             return new ResponseEntity<>(event, HttpStatus.OK);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    // 4. REMOVE BY ID - DELETE /api/events/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable UUID id) {
         try {
             eventService.deleteEvent(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    // 5. FULL UPDATE (PUT) - PUT /api/events/{id}
     @PutMapping("/{id}")
     public ResponseEntity<Event> updateEvent(@PathVariable UUID id, @RequestBody Event event) {
         try {
             Event updatedEvent = eventService.updateEvent(id, event);
             return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
-    // 6. PARTIAL UPDATE (PATCH) - PATCH /api/events/{id}
     @PatchMapping("/{id}")
     public ResponseEntity<Event> partialUpdateEvent(@PathVariable UUID id, @RequestBody Event partialEvent) {
         try {
             Event updatedEvent = eventService.partialUpdateEvent(id, partialEvent);
             return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
