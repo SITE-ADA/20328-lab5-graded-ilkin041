@@ -97,4 +97,10 @@ public class EventServiceImpl implements EventService {
     }
 
 
+    @Override
+    public List<Event> getEventsByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
+        // commit for getEvent
+        return eventRepository.findByTicketPriceBetween(minPrice, maxPrice);
+    }
+
 }
