@@ -92,7 +92,10 @@ public class EventServiceImpl implements EventService {
     }
 
 
-    
+    @Override
+    public List<Event> getUpcomingEvents() {
+        return eventRepository.findByEventDateTimeAfterOrderByEventDateTime(LocalDateTime.now());
+    }
  
     
  
