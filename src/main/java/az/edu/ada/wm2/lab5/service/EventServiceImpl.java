@@ -91,4 +91,10 @@ public class EventServiceImpl implements EventService {
                 eventRepository.findByTagsContainingIgnoreCaseOrderByEventDateTime(tag.trim());
     }
 
+    @Override
+    public List<Event> getUpcomingEvents() {
+        return eventRepository.findByEventDateTimeAfterOrderByEventDateTime(LocalDateTime.now());
+    }
+
+
 }
