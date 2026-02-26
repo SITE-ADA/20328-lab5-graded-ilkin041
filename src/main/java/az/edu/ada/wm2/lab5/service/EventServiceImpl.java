@@ -104,6 +104,11 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findByTicketPriceBetween(minPrice, maxPrice);
     }
  
+
+     @Override
+    public List<Event> getEventsByDateRange(LocalDateTime start, LocalDateTime end) {
+        return eventRepository.findByEventDateTimeBetween(start, end);
+    }
     
  
 }
