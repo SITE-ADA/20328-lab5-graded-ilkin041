@@ -109,6 +109,11 @@ public class EventServiceImpl implements EventService {
     }
 
 
-
+    @Override
+    public Event updateEventPrice(UUID id, BigDecimal newPrice) {
+        Event event = getEventById(id); // Reuses your existing getEventById logic
+        event.setTicketPrice(newPrice);
+        return eventRepository.save(event);
+    }
 
 }
